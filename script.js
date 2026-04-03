@@ -58,17 +58,12 @@ if ('serviceWorker' in navigator) {
 
 /* FUNÇÃO DE TESTE FORÇADO */
 btnAtualizar.addEventListener('click', function() {
-    // Tenta vibrar ANTES de qualquer busca (mais chance de o navegador aceitar)
-    try {
-        if (navigator.vibrate) {
-            // Padrão de vibração: vibra 100ms, para 50ms, vibra 100ms
-            navigator.vibrate([100, 50, 100]); 
-            console.log("Comando de vibração enviado!");
-        }
-    } catch (e) {
-        console.log("Erro ao vibrar:", e);
+    // 1º: VIBRA IMEDIATAMENTE (Sem esperar a API)
+    if (navigator.vibrate) {
+        navigator.vibrate(100); 
+        console.log("Tentando vibrar...");
     }
     
-    // Agora busca os preços
+    // 2º: DEPOIS chama a função de buscar preços
     buscarPrecos(false); 
 });
