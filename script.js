@@ -49,18 +49,26 @@ async function buscarPrecos(vibrar = false) {
     }
 }
 
-// Registro do Service Worker (PWA)
+// Substitua o final do seu arquivo por isso:
+
+/* Registro do Service Worker */
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js')
-        .then(() => console.log('Service Worker ativo!'))
-        .catch(err => console.log('Erro SW:', err));
+    navigator.serviceWorker.register('./sw.js').catch(err => console.log(err));
 }
 
-// Evento de Clique (Único que permite vibrar e instalar)
-btnAtualizar.addEventListener('click', () => buscarPrecos(true));
-
-// Carrega os dados ao abrir (Sem vibrar para não dar erro)
-buscarPrecos(false);
-
-// Atualiza sozinho a cada 30s (Sem vibrar)
-setInterval(() => buscarPrecos(false), 30000);
+/* FUNÇÃO DE TESTE FORÇADO */
+btnAtualizar.addEventListener('click', function() {
+    // Tenta vibrar ANTES de qualquer busca (mais chance de o navegador aceitar)
+    try {
+        if (navigator.vibrate) {
+            // Padrão de vibração: vibra 100ms, para 50ms, vibra 100ms
+            navigator.vibrate([100, 50, 100]); 
+            console.log("Comando de vibração enviado!");
+        }
+    } catch (e) {
+        console.log("Erro ao vibrar:", e);
+    }
+    
+    // Agora busca os preços
+    buscarPrecos(false); 
+});
