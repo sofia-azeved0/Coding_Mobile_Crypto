@@ -1,8 +1,6 @@
-/* Seleção dos elementos do HTML */
 const cryptoList = document.getElementById('crypto-list');
 const btnAtualizar = document.querySelector('button');
 
-/* Lista de moedas para buscar na API */
 const moedas = [
     { id: 'BTC', nome: 'Bitcoin' },
     { id: 'ETH', nome: 'Ethereum' },
@@ -10,23 +8,18 @@ const moedas = [
     { id: 'ADA', nome: 'Cardano' }
 ];
 
-/* Função para buscar os dados do Mercado Bitcoin */
-async function buscarPrecos() {
-    
-    /* Recurso de Hardware: Vibração do celular ao atualizar */
-    if (navigator.vibrate) {
-        navigator.vibrate(50); 
+async function buscarPrecos(vibrar = false) {
+    // Hardware: Só vibra se o usuário clicar (vibrar = true)
+    if (vibrar && navigator.vibrate) {
+        navigator.vibrate(50);
     }
 
-    // Mensagem de carregando
     cryptoList.innerHTML = '<div class="loader">Sincronizando...</div>';
     
     try {
-        // Faz as requisições de todas as moedas ao mesmo tempo
         const promessas = moedas.map(async (moeda) => {
             const res = await fetch(`https://www.mercadobitcoin.net/api/${moeda.id}/ticker/`);
             const data = await res.json();
-            
             return {
                 nome: moeda.nome,
                 simbolo: moeda.id,
@@ -35,11 +28,8 @@ async function buscarPrecos() {
         });
 
         const resultados = await Promise.all(promessas);
-
-        // Limpa a tela antes de mostrar os preços
         cryptoList.innerHTML = '';
 
-        // Cria o HTML de cada card de moeda
         resultados.forEach(coin => {
             const card = `
                 <div class="coin-card">
@@ -54,25 +44,23 @@ async function buscarPrecos() {
             `;
             cryptoList.innerHTML += card;
         });
-
     } catch (error) {
-        // Mostra mensagem de erro caso a API falhe
-        console.error(error);
-        cryptoList.innerHTML = '<p style="color: #ff4d4d">Erro ao conectar com o servidor. Tente novamente.</p>';
+        cryptoList.innerHTML = '<p style="color: #ff4d4d">Erro ao carregar dados.</p>';
     }
 }
 
-/* Registro do Service Worker para o PWA */
+// Registro do Service Worker (PWA)
 if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js')
-            .then(reg => console.log('Service Worker registrado!'))
-            .catch(err => console.log('Erro no Service Worker', err));
-    });
+    navigator.serviceWorker.register('./sw.js')
+        .then(() => console.log('Service Worker ativo!'))
+        .catch(err => console.log('Erro SW:', err));
 }
 
-/* Evento do botão de atualizar */
-btnAtualizar.addEventListener('click', buscarPrecos);
+// Evento de Clique (Único que permite vibrar e instalar)
+btnAtualizar.addEventListener('click', () => buscarPrecos(true));
 
-/* Atualiza os dados automaticamente a cada 30 segundos */
-setInterval(buscarPrecos, 30000);
+// Carrega os dados ao abrir (Sem vibrar para não dar erro)
+buscarPrecos(false);
+
+// Atualiza sozinho a cada 30s (Sem vibrar)
+setInterval(() => buscarPrecos(false), 30000);

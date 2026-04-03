@@ -1,7 +1,7 @@
 {
   "name": "Crypto Monitor",
   "short_name": "Crypto",
-  "description": "Monitor de Criptomoedas em tempo real - Projeto ADS",
+  "description": "Monitor de Cripto em tempo real",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0d1117",
@@ -12,12 +12,6 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
-    },
-    {
-      "src": "https://cdn-icons-png.flaticon.com/512/2091/2091665.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
     }
   ],
   "screenshots": [
@@ -26,14 +20,14 @@
       "sizes": "512x512",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "Visualização Desktop"
+      "label": "Desktop"
     },
     {
       "src": "https://cdn-icons-png.flaticon.com/512/2091/2091665.png",
       "sizes": "512x512",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "Visualização Mobile"
+      "label": "Mobile"
     }
   ]
 }
