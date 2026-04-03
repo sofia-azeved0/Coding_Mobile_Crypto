@@ -2,6 +2,8 @@
 
 Este projeto foi desenvolvido como atividade acadêmica para o curso de **Análise e Desenvolvimento de Sistemas (ADS)**, com foco em desenvolvimento web moderno, consumo de APIs reais, tecnologias PWA (Progressive Web App) e integração com hardware do dispositivo.
 
+🔗 **Acesse o projeto aqui:** [https://sofia-azevedo.github.io/Atividade_Coding_Crypto/](https://sofia-azevedo.github.io/Atividade_Coding_Crypto/)
+
 ## ⚙️ Funcionalidades e Diferenciais Técnicos
 - **Consulta em Tempo Real:** Consumo de dados assíncronos via Fetch API do Mercado Bitcoin.
 - **PWA Completo:** Aplicativo instalável com manifesto configurado e suporte a Service Worker para cache.
@@ -15,7 +17,7 @@ Este projeto foi desenvolvido como atividade acadêmica para o curso de **Análi
 - **Vibration API**: Recurso de hardware para interação física.
 
 ## 📂 Como visualizar e Testar
-1.  **Acesse o link do GitHub Pages** pelo navegador do seu celular.
+1.  **Acesse o link do projeto** pelo navegador do seu celular.
 2.  Para testar o **PWA**, abra o menu do navegador (três pontinhos) e selecione **"Instalar aplicativo"** ou **"Adicionar à tela de início"**.
 3.  Para testar o **Hardware**, clique no botão **"Atualizar Agora"** e sinta o feedback de vibração do dispositivo.
 
